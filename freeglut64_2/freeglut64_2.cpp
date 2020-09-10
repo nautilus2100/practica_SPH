@@ -231,7 +231,7 @@ void Keyboard(unsigned char c, int x, int y)
 		particles.clear();
 		InitSPH();
 		break;
-
+	//cambio del valor de gravedad con teclas j y k.
 	case 'j':
 		neg = -1;
 		break;
