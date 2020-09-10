@@ -43,6 +43,7 @@ using namespace Eigen;
 
 // "Particle-Based Fluid Simulation for Interactive Applications"
 // solver parameters
+int neg = 1;
 const static Vector2d G(0.f, 12000 * -9.8f); // external (gravitational) forces
 const static float REST_DENS = 1000.f; // rest density
 const static float GAS_CONST = 2000.f; // const for equation of state
@@ -170,7 +171,7 @@ void ComputeForces(void)
 				fvisc += VISC * MASS * (pj.v - pi.v) / pj.rho * VISC_LAP * (H - r);
 			}
 		}
-		Vector2d fgrav = G * pi.rho;
+		Vector2d fgrav = G * pi.rho * neg;
 		pi.f = fpress + fvisc + fgrav;
 	}
 }
@@ -229,6 +230,14 @@ void Keyboard(unsigned char c, int x, int y)
 	case 'R':
 		particles.clear();
 		InitSPH();
+		break;
+
+	case 'j':
+		neg = -1;
+		break;
+
+	case 'k':
+		neg = 1;
 		break;
 	}
 }
